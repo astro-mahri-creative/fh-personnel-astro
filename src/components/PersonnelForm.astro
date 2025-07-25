@@ -152,7 +152,7 @@
                 if (response.ok) {
                     successMessage.style.display = 'block';
                     errorMessage.style.display = 'none';
-                    form.reset();
+                    form.onreset();
                 } else {
                     throw new Error('Network response was not ok.');
                 }
