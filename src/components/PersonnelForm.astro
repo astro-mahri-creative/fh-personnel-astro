@@ -80,23 +80,13 @@
                 <p style="font-size: 11px; text-align: center; margin: 15px 0; font-style: italic;" id="alignmentDescription">
                     Rate your loyalty/alignment on the scale below:
                 </p>
-                <div class="alignment-scale">
-                    <div class="scale-number" data-value="1">1</div>
-                    <div class="scale-number" data-value="2">2</div>
-                    <div class="scale-number" data-value="3">3</div>
-                    <div class="scale-number" data-value="4">4</div>
-                    <div class="scale-number" data-value="5">5</div>
-                    <div class="scale-number" data-value="6">6</div>
-                    <div class="scale-number" data-value="7">7</div>
-                    <div class="scale-number" data-value="8">8</div>
-                    <div class="scale-number" data-value="9">9</div>
-                    <div class="scale-number" data-value="10">10</div>
+                <div class="alignment-slider">
+                    <input type="range" min="1" max="100" value="50" class="slider" name="alignment" id="alignment">
                 </div>
                 <div class="alignment-labels">
                     <span class="alignment-label-left">Primarily Self-Serving</span>
                     <span class="alignment-label-right">Dedicated to the Organization</span>
                 </div>
-                <input type="hidden" name="alignment" id="alignment" required>
             </div>
 
             <div class="signature-section">
@@ -127,18 +117,22 @@
         const submitBtn = document.getElementById('submitBtn');
         const successMessage = document.getElementById('successMessage');
         const errorMessage = document.getElementById('errorMessage');
-        const alignmentScale = document.querySelector('.alignment-scale');
-        const alignmentInput = document.getElementById('alignment');
+        const inputs = form.querySelectorAll('input[type="text"]');
+        const styles = ['phax', 'fheels', 'futurehooman'];
+        let currentStyleIndex = 0;
 
-        alignmentScale.addEventListener('click', (e) => {
-            if (e.target.classList.contains('scale-number')) {
-                const value = e.target.dataset.value;
-                alignmentInput.value = value;
+        const switchStyle = () => {
+            document.body.classList.remove(...styles);
+            const newStyle = styles[Math.floor(Math.random() * styles.length)];
+            document.body.classList.add(newStyle);
+        };
 
-                document.querySelectorAll('.scale-number').forEach(el => el.classList.remove('selected'));
-                e.target.classList.add('selected');
-            }
+        inputs.forEach(input => {
+            input.addEventListener('focus', switchStyle);
         });
+
+        // Set initial style
+        switchStyle();
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -159,7 +153,6 @@
                     successMessage.style.display = 'block';
                     errorMessage.style.display = 'none';
                     form.reset();
-                    document.querySelectorAll('.scale-number').forEach(el => el.classList.remove('selected'));
                 } else {
                     throw new Error('Network response was not ok.');
                 }

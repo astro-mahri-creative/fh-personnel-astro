@@ -10,8 +10,8 @@ const $$Astro = createAstro();
 const $$Layout = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
   Astro2.self = $$Layout;
-  const { title, theme } = Astro2.props;
-  return renderTemplate`<html lang="en"${addAttribute([theme], "class:list")}> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator"${addAttribute(Astro2.generator, "content")}><title>${title}</title>${renderHead()}</head> <body> <div${addAttribute([theme], "class:list")}> ${renderSlot($$result, $$slots["default"])} </div> </body></html>`;
+  const { theme } = Astro2.props;
+  return renderTemplate`<html lang="en"${addAttribute([theme], "class:list")}> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator"${addAttribute(Astro2.generator, "content")}><title>${Astro2.props.title}</title>${renderHead()}</head> <body> ${renderSlot($$result, $$slots["default"])} </body></html>`;
 }, "/home/user/fh-personnel-astro/src/layouts/Layout.astro", void 0);
 
 const $$Personnel = createComponent(($$result, $$props, $$slots) => {
