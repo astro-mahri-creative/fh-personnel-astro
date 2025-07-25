@@ -1,0 +1,11 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PersonnelForm from '../components/PersonnelForm.astro';
+
+const themes = ['phax', 'fheels', 'futurehooman'];
+const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+---
+
+<Layout title="Personnel Documentation Form" theme={randomTheme}>
+  <PersonnelForm />
+</Layout>
