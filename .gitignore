@@ -1,2 +1,27 @@
+# Dependencies
+/node_modules
+
+# Build artifacts
+/dist
+/.astro
+/.firebase
+firebase-debug.log
+
+# IDEs and editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Miscellaneous
+.DS_Store
+*.log
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 fh-personnel-form-ceb60-6615a01065db.json
-node_modules

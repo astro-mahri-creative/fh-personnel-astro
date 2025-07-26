@@ -4,17 +4,16 @@ interface Props {
 }
 
 const { title } = Astro.props;
-
-import '../styles/global.css';
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		<meta name="description" content="Future Hooman | Personnel Info Form" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
@@ -22,22 +21,32 @@ import '../styles/global.css';
 		<slot />
 	</body>
 </html>
-<script>
-	document.addEventListener('DOMContentLoaded', () => {
-		const themes = ['phax', 'fheels', 'futurehooman'];
-		let currentTheme = 'futurehooman';
-
-		// Set initial theme
-		document.body.classList.add(currentTheme);
-
-		const switchTheme = () => {
-			const newTheme = themes[Math.floor(Math.random() * themes.length)];
-			document.body.classList.remove(currentTheme);
-			document.body.classList.add(newTheme);
-			currentTheme = newTheme;
-		};
-
-		document.addEventListener('click', switchTheme);
-		document.addEventListener('focusin', switchTheme);
-	});
-</script>
+<style is:global>
+	:root {
+		--accent: 136, 58, 234;
+		--accent-light: 224, 204, 250;
+		--accent-dark: 49, 10, 101;
+		--accent-gradient: linear-gradient(
+			45deg,
+			rgb(var(--accent)),
+			rgb(var(--accent-light)) 30%,
+			white 60%
+		);
+	}
+	html {
+		font-family: system-ui, sans-serif;
+		background: #13151a;
+		background-size: 224px;
+	}
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+	}
+</style>
