@@ -113,13 +113,14 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('characterForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const successMessage = document.getElementById('successMessage');
-        const errorMessage = document.getElementById('errorMessage');
+        const form = document.getElementById('characterForm') as HTMLFormElement;
+        if (!form) return;
+
+        const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
+        const successMessage = document.getElementById('successMessage') as HTMLElement;
+        const errorMessage = document.getElementById('errorMessage') as HTMLElement;
         const inputs = form.querySelectorAll('input[type="text"]');
         const styles = ['phax', 'fheels', 'futurehooman'];
-        let currentStyleIndex = 0;
 
         const switchStyle = () => {
             document.body.classList.remove(...styles);
@@ -136,8 +137,10 @@
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'TRANSMITTING...';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'TRANSMITTING...';
+            }
 
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
@@ -150,18 +153,20 @@
                 });
 
                 if (response.ok) {
-                    successMessage.style.display = 'block';
-                    errorMessage.style.display = 'none';
-                    form.onreset();
+                    if (successMessage) successMessage.style.display = 'block';
+                    if (errorMessage) errorMessage.style.display = 'none';
+                    form.reset();
                 } else {
                     throw new Error('Network response was not ok.');
                 }
             } catch (error) {
-                errorMessage.style.display = 'block';
-                successMessage.style.display = 'none';
+                if (errorMessage) errorMessage.style.display = 'block';
+                if (successMessage) successMessage.style.display = 'none';
             } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'TRANSMIT DOCUMENTATION';
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'TRANSMIT DOCUMENTATION';
+                }
             }
         });
     });
